@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Modele;
 use PDO;
 /* final = constante */
 /* static = attribue de classe */ 

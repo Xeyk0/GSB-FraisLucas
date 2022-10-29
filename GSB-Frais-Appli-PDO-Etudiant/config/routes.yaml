@@ -34,3 +34,8 @@ app_VisiteurConncter:
 app_VisiteurAccueil:
   path: /Visiteur/Accueil
   controller: App\Controller\VisiteurController::accueil
+
+app_VisiteurVoirFicheFrais:
+  path: /Visiteur/FicheFrais
+  controller: App\Controller\VisiteurController::voirFicheFrais
+

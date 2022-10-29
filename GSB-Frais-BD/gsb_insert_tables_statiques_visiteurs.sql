@@ -65,3 +65,13 @@ INSERT INTO `Comptable` (`id`, `nom`, `prenom`, `login`, `mdp`) VALUES
 ('c2', 'Villechalane', 'Louis', 'lvillachane', 'jux7g'),
 ('c3', 'Villechalane', 'Louis', 'lvillachane', 'jux7g');
 -- --------------------------------------------------------
+
+--
+-- Contenu de la table `FicheFrais`
+--
+
+INSERT INTO `FicheFrais` (`idVisiteur`,`mois`,`nbJustificatifs`,`montantValide`,`dateModif`,`idEtat`) VALUES
+('a131','Avril',5,15.10,'2022-10-24','CL'),
+('a131','Juillet',2,10.28,'2022-08-04','RB'),
+('a131','Janvier',4,133.43,'2022-02-17','VA');
+-- --------------------------------------------------------

@@ -1,0 +1,32 @@
+<h1>Fiche de frais</h1>
+{{form(formulaire)}}
+{% if ficheFrais is not empty %}
+<table>
+<thead>
+    <tr>
+        <th>Id Visiteur</th>
+        <th> Mois </th>
+        <th>Nombre de justificatifs</th>
+        <th>Montant valide</th>
+        <th>Date modif</th>
+        <th>Etat</th>
+    
+    </tr>
+</thead>
+<tbody>
+{% for uneFiche in ficheFrais %}
+<tr>
+    <td>{{ uneFiche['idVisiteur']}}</td>
+    <td>{{ uneFiche['mois']}}</td>
+    <td>{{ uneFiche['nbJustificatifs']}}</td>
+    <td>{{ uneFiche['montantValide']}}</td>
+    <td>{{ uneFiche['dateModif']}}</td>
+    <td>{{ uneFiche['idEtat']}}</td>
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+{% else %}
+    Pas de fiche ce mois
+{% endif %}
