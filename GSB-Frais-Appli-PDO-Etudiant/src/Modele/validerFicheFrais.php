@@ -2,7 +2,7 @@
 namespace App\Controller;
 use PDO;
 use App\Modele\ConnexionBdd;
-function voirFicheFrais($mois){
+function validerFicheFrais($mois,$idVisiteur){
     try {
 
         /*$bd = ConnexionBdd::getConnexion();*/
@@ -14,19 +14,19 @@ function voirFicheFrais($mois){
             'azerty'
         );
 
-            $sql = 'select idEtat, LigneFraisForfait.idFraisForfait, LigneFraisForfait.quantite, LigneFraisHorsForfait.libelle, LigneFraisHorsForfait.date, LigneFraisHorsForfait.montant, (FraisForfait.montant * LigneFraisForfait.quantite) as Total '
+            $sql = 'select LigneFraisForfait.idFraisForfait, LigneFraisForfait.quantite, LigneFraisHorsForfait.libelle, LigneFraisHorsForfait.date, LigneFraisHorsForfait.montant, (FraisForfait.montant * LigneFraisForfait.quantite) as Total '
             . 'from FicheFrais '
             . 'inner join LigneFraisForfait on FicheFrais.idVisiteur = LigneFraisForfait.idVisiteur '
             . 'inner join LigneFraisHorsForfait on FicheFrais.idVisiteur = LigneFraisHorsForfait.idVisiteur '
             . 'inner join FraisForfait on FraisForfait.id = LigneFraisForfait.idFraisForfait '
-            . 'where FicheFrais.mois = :mois';
+            . 'where FicheFrais.mois = :mois and FicheFrais.idVisiteur = :idVisiteur ';
             
                 
             $st = $bd -> prepare( $sql ) ;
 
             $st -> execute( array( 
-                                    ':mois' => $mois
-                            
+                                    ':mois' => $mois, 
+                                    ':idVisiteur' => $idVisiteur,
                                     
                             ) 
                         ) ;

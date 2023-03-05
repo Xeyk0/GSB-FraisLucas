@@ -21,6 +21,10 @@ app_ComptableAccueil:
   path: /Comptable/Accueil
   controller: App\Controller\ComptableController::accueil
 
+app_ComptableValiderFicheFrais:
+  path: /Comptable/ValiderFicheFrais
+  controller: App\Controller\ComptableController::validerFicheFrais
+
 #----------------------------------------------------------
 
 app_VisiteurConnexion:

@@ -1,27 +1,54 @@
 <h1>Fiche de frais</h1>
 {{form(formulaire)}}
 {% if ficheFrais is not empty %}
+<h2>Etat</h2>
+<table>
+<tbody>
+{% for uneFiche in ficheFrais %}
+<td>{{ uneFiche['idEtat']}}</td>
+{% endfor %}
+</tbody>
+</table>
+
+
+<h2>Ligne de frais forfaitisé</h2>
 <table>
 <thead>
     <tr>
-        <th>Id Visiteur</th>
-        <th> Mois </th>
-        <th>Nombre de justificatifs</th>
-        <th>Montant valide</th>
-        <th>Date modif</th>
-        <th>Etat</th>
+        <th>Frais forfait</th>
+        <th>Quantité</th> 
+        <th>Total</th>  
+    </tr>
+</thead>
+<tbody>
+{% for uneFiche in ficheFrais %}
+<tr>
+    <td>{{ uneFiche['idFraisForfait']}}</td>
+    <td>{{ uneFiche['quantite']}}</td>
+    <td>{{ uneFiche['Total']}}</td>
+    
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+<h2>Ligne de frais hors forfait</h2>
+<table>
+<thead>
+    <tr>
+        <th>Libelle</th>
+        <th>Date</th>
+        <th>Montant</th>
     
     </tr>
 </thead>
 <tbody>
 {% for uneFiche in ficheFrais %}
 <tr>
-    <td>{{ uneFiche['idVisiteur']}}</td>
-    <td>{{ uneFiche['mois']}}</td>
-    <td>{{ uneFiche['nbJustificatifs']}}</td>
-    <td>{{ uneFiche['montantValide']}}</td>
-    <td>{{ uneFiche['dateModif']}}</td>
-    <td>{{ uneFiche['idEtat']}}</td>
+    <td>{{ uneFiche['libelle']}}</td>
+    <td>{{ uneFiche['date']}}</td>
+    <td>{{ uneFiche['montant']}}</td>
+
 </tr>
 {% endfor %}
 

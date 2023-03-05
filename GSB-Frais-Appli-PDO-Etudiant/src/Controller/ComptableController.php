@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use App\Controller\classes;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 class ComptableController extends AbstractController
@@ -36,6 +40,30 @@ class ComptableController extends AbstractController
             'controller_name' => 'ComptableController',
         ]);
     }
+
+    public function validerFicheFrais( Request $request): Response
+    {
+
+        $form = $this->createFormBuilder()
+        ->add ('mois', TextType::class)
+        ->add ('idVisiteur', TextType::class)
+        ->add ('valider', SubmitType::class)
+        ->getForm();
+
+        $form->handleRequest($request);
+        
+        $validerFicheFrais=[];
+        if ($form->isSubmitted() && $form->isValid()){
+            $mois=$form->get('mois')->getData();
+            $idVisiteur=$form->get('idVisiteur')->getData();
+            $validerFicheFrais= validerFicheFrais($mois,$idVisiteur);
+
+        }
+
+        return $this->render('comptable/validerFicheFrais.html.twig', [
+            'controller_name' => 'ComptableController', 
+            'formulaire'=>$form->createView(),
+            'validerFicheFrais'=>$validerFicheFrais
+        ]);
+    }
 }
-/*$login = $_GET[ 'login' ] ;
-$mdp = $_GET[ 'mdp' ] ;*/

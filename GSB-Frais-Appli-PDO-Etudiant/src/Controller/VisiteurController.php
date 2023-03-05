@@ -68,13 +68,7 @@ class VisiteurController extends AbstractController
         ]);
     }
 
-    #[Route('/Visiteur/FicheFrais/{mois}', name: 'voirFicheFrais')]
-    public function voirStagesAnimateurs($idAnimateur, AnimateurRepository $stage): Response
-    {
-        return $this->render('stage/base.html.twig', [
-            'stages' => $stage->getStageParAnimateurs($idAnimateur) ,
-        ]);
-    }
+   
 
 
     
