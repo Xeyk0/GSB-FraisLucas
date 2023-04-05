@@ -45,6 +45,13 @@ class Lignefraishorsforfait
     private $montant;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="refuser", type="boolean", nullable=false)
+     */
+    private $refuser;
+
+    /**
      * @var \Fichefrais
      *
      * @ORM\ManyToOne(targetEntity="Fichefrais")
@@ -104,6 +111,18 @@ class Lignefraishorsforfait
     public function setIdvisiteur(?Fichefrais $idvisiteur): self
     {
         $this->idvisiteur = $idvisiteur;
+
+        return $this;
+    }
+
+    public function isRefuser(): ?bool
+    {
+        return $this->refuser;
+    }
+
+    public function setRefuser(bool $refuser): self
+    {
+        $this->refuser = $refuser;
 
         return $this;
     }

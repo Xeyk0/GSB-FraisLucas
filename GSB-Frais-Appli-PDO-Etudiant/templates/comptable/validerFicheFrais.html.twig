@@ -1,0 +1,52 @@
+<h1>Fiche de frais</h1>
+{{form(formulaire)}}
+{% if validerFicheFrais is not empty %}
+<h2>Ligne de frais forfaitisé</h2>
+<table>
+<thead>
+    <tr>
+        <th>Frais forfait</th>
+        <th>Quantité</th> 
+        <th>Total</th>  
+    </tr>
+</thead>
+<tbody>
+{% for uneFiche in validerFicheFrais %}
+<tr>
+    <td>{{ uneFiche['idFraisForfait']}}</td>
+    <td>{{ uneFiche['quantite']}}</td>
+    <td>{{ uneFiche['Total']}}</td>
+    <td><a style="border:1px solid black" href="/Comptable/modifierFicheFrais?idLigne={{uneFiche['id']}}">MODIFIER</a> </td>
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+
+<h2>Ligne de frais hors forfait</h2>
+<table>
+<thead>
+    <tr>
+        <th>Libelle</th>
+        <th>Date</th>
+        <th>Montant</th>
+    
+    </tr>
+</thead>
+<tbody>
+{% for uneFiche in validerFicheFrais %}
+<tr>
+    <td>{% if uneFiche['Refuser'] %}REFUSER {% endif %}{{ uneFiche['libelle']}}</td>
+    <td>{{ uneFiche['date']}}</td>
+    <td>{{ uneFiche['montant']}}</td>
+    <td><a style="border:1px solid black" href="/Comptable/modifierFicheFrais?idLigne={{uneFiche['id']}}">REFUSER</a> </td>
+
+</tr>
+{% endfor %}
+
+</tbody>
+</table>
+<a style="border:1px solid black" href="/Comptable/valider?idVisiteur={{validerFicheFrais[0]['idVisiteur']}}">Valider</a>
+{% else %}
+    Pas de fiche ce mois
+{% endif %}

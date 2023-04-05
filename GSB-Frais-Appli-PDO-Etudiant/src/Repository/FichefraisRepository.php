@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Repository;
 
 use App\Entity\Fichefrais;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;

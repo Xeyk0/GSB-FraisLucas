@@ -25,6 +25,19 @@ app_ComptableValiderFicheFrais:
   path: /Comptable/ValiderFicheFrais
   controller: App\Controller\ComptableController::validerFicheFrais
 
+app_ComptableModifierFicheFrais:
+  path: /Comptable/modifierFicheFrais
+  controller: App\Controller\ComptableController::refuserFicheFrais
+  
+app_ComptableValider:
+  path: /Comptable/valider
+  controller: App\Controller\ComptableController::valider
+
+app_ComptableModifierFraisForfait:
+  path: /Comptable/modifierFraisForfait
+  controller: App\Controller\ComptableController::modifierFraisForfait
+
+
 #----------------------------------------------------------
 
 app_VisiteurConnexion:
