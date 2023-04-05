@@ -16,7 +16,7 @@
     <td>{{ uneFiche['idFraisForfait']}}</td>
     <td>{{ uneFiche['quantite']}}</td>
     <td>{{ uneFiche['Total']}}</td>
-    <td><a style="border:1px solid black" href="/Comptable/modifierFicheFrais?idLigne={{uneFiche['id']}}">MODIFIER</a> </td>
+    <td><a style="border:1px solid black" href="/Comptable/modifierFraisForfait?idVisiteur={{uneFiche['idVisiteur']}}&idFraisForfait={{uneFiche['idFraisForfait']}}&mois={{uneFiche['mois']}}">MODIFIER</a> </td>
 </tr>
 {% endfor %}
 

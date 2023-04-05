@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Entity\Lignefraishorsforfait;
 use App\Entity\Fichefrais;
 use App\Entity\Etat;
+use App\Entity\Lignefraisforfait;
 
 
 class ComptableController extends AbstractController
@@ -109,27 +110,36 @@ return $this->redirectToRoute('app_ComptableValiderFicheFrais');
 
 
 public function modifierFraisForfait(Request $request): Response {
-    
+    $mois = $request->query->get('mois');
+    $idVisiteur= $request->query->get('idVisiteur');
+    $idFraisForfait = $request->query->get('idFraisForfait');
+
+
+    $ligneFraisForfait = $this->getDoctrine()->getRepository(Lignefraisforfait::class)->findOneBy(["idvisiteur"=>$idVisiteur, 'idfraisforfait'=>$idFraisForfait,'mois'=>$mois]);
 
         $form = $this->createFormBuilder()
-        ->add ('idFraisForfait', TextType::class)
-        ->add ('quantite', TextType::class)
+        ->add ('quantite', TextType::class,['data'=>$ligneFraisForfait->getQuantite()])
+        ->add ('valider', SubmitType::class) 
         ->getForm();
 
         $form->handleRequest($request);
         
-        $modifierFraisForfait=[];
+        
         if ($form->isSubmitted() && $form->isValid()){
-            $idFraisForfait=$form->get('idFraisForfait')->getData();
+            
             $quantite=$form->get('quantite')->getData();
-
+            
+            $ligneFraisForfait->setQuantite($quantite);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($ligneFraisForfait);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_ComptableValiderFicheFrais');
 
         }
 
         return $this->render('comptable/modifierFraisForfait.html.twig', [
             'controller_name' => 'ComptableController', 
             'formulaire'=>$form->createView(),
-            'modifierFraisForfait'=>$modifierFraisForfait
         ]);
     
 

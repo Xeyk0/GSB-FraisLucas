@@ -14,7 +14,7 @@ function validerFicheFrais($mois,$idVisiteur){
             'azerty'
         );
 
-            $sql = 'select distinct FicheFrais.idVisiteur,LigneFraisHorsForfait.Refuser,LigneFraisHorsForfait.id, LigneFraisForfait.idFraisForfait, LigneFraisForfait.quantite, LigneFraisHorsForfait.libelle, LigneFraisHorsForfait.date, LigneFraisHorsForfait.montant, (FraisForfait.montant * LigneFraisForfait.quantite) as Total '
+            $sql = 'select distinct LigneFraisForfait.mois, FicheFrais.idVisiteur,LigneFraisHorsForfait.Refuser,LigneFraisHorsForfait.id, LigneFraisForfait.idFraisForfait, LigneFraisForfait.quantite, LigneFraisHorsForfait.libelle, LigneFraisHorsForfait.date, LigneFraisHorsForfait.montant, (FraisForfait.montant * LigneFraisForfait.quantite) as Total '
             . 'from FicheFrais '
             . 'inner join LigneFraisForfait on FicheFrais.idVisiteur = LigneFraisForfait.idVisiteur '
             . 'inner join LigneFraisHorsForfait on FicheFrais.idVisiteur = LigneFraisHorsForfait.idVisiteur '

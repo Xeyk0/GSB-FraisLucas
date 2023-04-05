@@ -159,7 +159,7 @@ class Fichefrais
     public function addIdfraisforfait(Fraisforfait $idfraisforfait): self
     {
         if (!$this->idfraisforfait->contains($idfraisforfait)) {
-            $this->idfraisforfait->add($idfraisforfait);
+            $this->idfraisforfait[] = $idfraisforfait;
             $idfraisforfait->addIdvisiteur($this);
         }
 

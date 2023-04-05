@@ -46,5 +46,32 @@ class Lignefraisforfait
      */
     private $quantite;
 
+    public function getMois(): ?string
+    {
+        return $this->mois;
+    }
+
+    public function getIdvisiteur(): ?string
+    {
+        return $this->idvisiteur;
+    }
+
+    public function getIdfraisforfait(): ?string
+    {
+        return $this->idfraisforfait;
+    }
+
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(?int $quantite): self
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
 
 }
