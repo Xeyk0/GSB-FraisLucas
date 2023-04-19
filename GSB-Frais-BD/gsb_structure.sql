@@ -30,7 +30,7 @@ USE gsbFrais;
 
 
 CREATE TABLE IF NOT EXISTS `FraisForfait` (
-  `id` char(3) NOT NULL,
+  `id` char(3)  NOT NULL,
   `libelle` char(20) DEFAULT NULL,
   `montant` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -75,14 +75,15 @@ CREATE TABLE IF NOT EXISTS `Visiteur` (
 -- Structure de la table `FicheFrais`
 --
 
-CREATE TABLE IF NOT EXISTS `FicheFrais` (
+  CREATE TABLE IF NOT EXISTS `FicheFrais` (
   `idVisiteur` char(4) NOT NULL,
-  `mois` char(6) NOT NULL,
-  `nbJustificatifs` int(11) DEFAULT NULL,
-  `montantValide` decimal(10,2) DEFAULT NULL,
+  `mois` char(20) DEFAULT NULL,
+  `AnneeMois` char(7) NOT NULL,
+  `nbJustificatifs` int(11) DEFAULT 0,
+  `montantValide` decimal(10,2) DEFAULT 0,
   `dateModif` date DEFAULT NULL,
   `idEtat` char(2) DEFAULT 'CR',
-  PRIMARY KEY (`idVisiteur`,`mois`),
+  PRIMARY KEY (`idVisiteur`,`AnneeMois`, `idEtat`),
   FOREIGN KEY (`idEtat`) REFERENCES Etat(`id`),
   FOREIGN KEY (`idVisiteur`) REFERENCES Visiteur(`id`)
 ) ENGINE=InnoDB;
@@ -96,11 +97,12 @@ CREATE TABLE IF NOT EXISTS `FicheFrais` (
 
 CREATE TABLE IF NOT EXISTS `LigneFraisForfait` (
   `idVisiteur` char(4) NOT NULL,
-  `mois` char(6) NOT NULL,
+  `mois` char(20) DEFAULT NULL,
+  `AnneeMois` char(7) NOT NULL,
   `idFraisForfait` char(3) NOT NULL,
   `quantite` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idVisiteur`,`mois`,`idFraisForfait`),
-  FOREIGN KEY (`idVisiteur`, `mois`) REFERENCES FicheFrais(`idVisiteur`, `mois`),
+  PRIMARY KEY (`idVisiteur`,`AnneeMois`,`idFraisForfait`),
+  FOREIGN KEY (`idVisiteur`, `AnneeMois`) REFERENCES FicheFrais(`idVisiteur`, `AnneeMois`),
   FOREIGN KEY (`idFraisForfait`) REFERENCES FraisForfait(`id`)
 ) ENGINE=InnoDB;
 
@@ -113,12 +115,13 @@ CREATE TABLE IF NOT EXISTS `LigneFraisForfait` (
 CREATE TABLE IF NOT EXISTS `LigneFraisHorsForfait` (
   `id` int(11) NOT NULL auto_increment,
   `idVisiteur` char(4) NOT NULL,
-  `mois` char(6) NOT NULL,
+  `mois` char(20) DEFAULT NULL,
+  `AnneeMois` char(7) NOT NULL,
   `libelle` varchar(100) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `montant` decimal(10,2) DEFAULT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (`idVisiteur`, `mois`) REFERENCES FicheFrais(`idVisiteur`, `mois`)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`idVisiteur`, `AnneeMois`) REFERENCES FicheFrais(`idVisiteur`, `AnneeMois`)
 ) ENGINE=InnoDB;
 
 -- --------------------------------------------------------

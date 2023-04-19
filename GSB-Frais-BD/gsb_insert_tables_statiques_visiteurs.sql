@@ -1,14 +1,13 @@
-USE gsbFrais;
-
 --
 -- Contenu de la table `FraisForfait`
 --
-
+use gsbFrais;
 INSERT INTO `FraisForfait` (`id`, `libelle`, `montant`) VALUES
 ('ETP', 'Forfait Etape', 110.00),
 ('KM', 'Frais Kilométrique', 0.62),
 ('NUI', 'Nuitée Hôtel', 80.00),
 ('REP', 'Repas Restaurant', 25.00);
+
 --
 -- Contenu de la table `LigneFraisForfait`
 --
@@ -21,7 +20,8 @@ INSERT INTO `Etat` (`id`, `libelle`) VALUES
 ('RB', 'Remboursée'),
 ('CL', 'Saisie clôturée'),
 ('CR', 'Fiche créée, saisie en cours'),
-('VA', 'Validée et mise en paiement');
+('VA', 'Validée'),
+('MP', 'Mise en paiement');
 
 -- --------------------------------------------------------
 
@@ -63,15 +63,27 @@ INSERT INTO `Visiteur` (`id`, `nom`, `prenom`, `login`, `mdp`, `adresse`, `cp`, 
 INSERT INTO `Comptable` (`id`, `nom`, `prenom`, `login`, `mdp`) VALUES
 ('c1', 'Boboch', 'Rémi', 'rboboch', 'azerty'),
 ('c2', 'Villechalane', 'Louis', 'lvillachane', 'jux7g'),
-('c3', 'Villechalane', 'Louis', 'lvillachane', 'jux7g');
+('c3', 'Mordak', 'Xavier', 'xmordak', 'azerty');
 -- --------------------------------------------------------
 
---
--- Contenu de la table `FicheFrais`
---
+/*INSERT INTO `FicheFrais` (`idVisiteur`, `mois`, `nbJustificatifs`, `montantValide`, `dateModif`, `idEtat`) VALUES
+('a131', 'Janvier', 0, 52.00, '2022-03-12', 'RB'),
+('d51', 'Mars', 3, 32.00, '2022-07-24', 'CR'),
+('d51', 'Mars', 14, 5.00, '2022-07-05', 'VA'),
+('e5', 'Novembre', 5, 100.00, '2022-12-01', 'VA'),
+('a93', 'Avril', 2, 45.00, '2022-05-29', 'CL');*/
 
-INSERT INTO `FicheFrais` (`idVisiteur`,`mois`,`nbJustificatifs`,`montantValide`,`dateModif`,`idEtat`) VALUES
-('a131','Avril',5,15.10,'2022-10-24','CL'),
-('a131','Juillet',2,10.28,'2022-08-04','RB'),
-('a131','Janvier',4,133.43,'2022-02-17','VA');
--- --------------------------------------------------------
+
+
+insert into FicheFrais(idVisiteur,mois,AnneeMois) values("a131", "Mars", "03-2023");
+insert into LigneFraisForfait values ("a131", "Mars",  "03-2023", "ETP", 0);
+insert into LigneFraisHorsForfait(idVisiteur,mois,AnneeMois,libelle,date,montant) values ("a131", "Mars",  "03-2023", "Voyage Mexique", "2023-03-10",0);
+insert into LigneFraisForfait values ("a131", "Mars",  "03-2023", "KM", 0);
+insert into LigneFraisHorsForfait(idVisiteur,mois,AnneeMois,libelle,date,montant) values ("a131", "Mars",  "03-2023", "Voyage Brésil", "2023-03-10",0);
+
+
+
+insert into FicheFrais(idVisiteur,mois,AnneeMois) values("a55", "Mars", "03-2023");
+insert into LigneFraisForfait values ("a55", "Mars",  "03-2023", "ETP", 0);
+insert into LigneFraisHorsForfait(idVisiteur,mois,AnneeMois,libelle,date,montant) values ("a55", "Mars",  "03-2023", "Voyage Mexique", "2023-03-10",0);
+
